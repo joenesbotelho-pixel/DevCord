@@ -22,8 +22,8 @@ Set-Service sshd -StartupType Automatic
 ## 2. Baixar o projeto
 
 ```powershell
-git clone https://github.com/SEU-USUARIO/devcord.git
-cd devcord
+git clone https://github.com/joenesbotelho-pixel/DevCord.git
+cd DevCord
 ```
 
 ## 3. Rodar
