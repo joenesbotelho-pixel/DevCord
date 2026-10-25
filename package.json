@@ -1,0 +1,18 @@
+{
+  "name": "devcord",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "server",
+    "web",
+    "vscode-extension"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,web -c blue,magenta \"npm run dev -w server\" \"npm run dev -w web\"",
+    "build": "npm run build -w web && npm run build -w vscode-extension",
+    "start": "npm run start -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

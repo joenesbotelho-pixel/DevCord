@@ -1,0 +1,60 @@
+{
+  "name": "devcord-vscode",
+  "displayName": "DevCord",
+  "description": "Conecta o VS Code ao seu servidor DevCord: chat da equipe, ambientes de trabalho isolados, terminal remoto e integração do repositório.",
+  "publisher": "devcord",
+  "version": "0.1.0",
+  "license": "MIT",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Other"],
+  "main": "./dist/extension.js",
+  "extensionKind": ["ui", "workspace"],
+  "activationEvents": ["onStartupFinished", "onFileSystem:devcord", "onUri"],
+  "contributes": {
+    "configuration": {
+      "title": "DevCord",
+      "properties": {
+        "devcord.serverUrl": {
+          "type": "string",
+          "default": "http://localhost:3001",
+          "description": "Endereço do servidor DevCord."
+        },
+        "devcord.autoTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Abrir o terminal do ambiente automaticamente ao abrir uma estação."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [{ "id": "devcord", "title": "DevCord", "icon": "media/icon.svg" }]
+    },
+    "views": {
+      "devcord": [{ "type": "webview", "id": "devcord.panel", "name": "Servidor" }]
+    },
+    "commands": [
+      { "command": "devcord.login", "title": "Entrar", "category": "DevCord" },
+      { "command": "devcord.logout", "title": "Sair", "category": "DevCord" },
+      { "command": "devcord.openEnvironment", "title": "Abrir meu ambiente", "category": "DevCord" },
+      { "command": "devcord.openTerminal", "title": "Abrir terminal do ambiente", "category": "DevCord", "icon": "$(terminal)" },
+      { "command": "devcord.commit", "title": "Salvar alterações (commit)", "category": "DevCord" },
+      { "command": "devcord.sync", "title": "Sincronizar com o main", "category": "DevCord" },
+      { "command": "devcord.integrate", "title": "Integrar ao main", "category": "DevCord" },
+      { "command": "devcord.replicate", "title": "Replicar ambiente nesta máquina (testar local)", "category": "DevCord" }
+    ],
+    "menus": {
+      "view/title": [{ "command": "devcord.openTerminal", "when": "view == devcord.panel", "group": "navigation" }]
+    }
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "watch": "node build.mjs --watch",
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "socket.io-client": "^4.8.1"
+  }
+}
